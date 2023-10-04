@@ -49,7 +49,7 @@ const DashboardSideBar: FC<SideNavBarProps> = ({
 }) => {
   const navigate = useNavigate();
 
-  const [active, setActive] = useState("Dashboard");
+  const [active, setActive] = useState("My products");
   const downMd = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
 
   const handleActiveMainMenu = (menuItem: any) => () => {

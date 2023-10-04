@@ -1,10 +1,16 @@
 import Icons from "icons/sidebar";
+import CategoryIcon from "@mui/icons-material/Category";
 
 const index = [
   {
+    title: "My products",
+    Icon: CategoryIcon,
+    path: "/dashboard",
+  },
+  {
     title: "Dashboard",
     Icon: Icons.DashboardIcon,
-    path: "/dashboard",
+    path: "/dashboard/default",
   },
   {
     title: "User Profile",

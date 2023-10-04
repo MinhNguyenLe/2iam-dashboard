@@ -12,6 +12,8 @@ const Loadable = (Component: LazyExoticComponent<FC>) => (props: any) =>
     </Suspense>
   );
 
+const MyProducts = Loadable(lazy(() => import("./pages/my-products")));
+
 // authentication pages
 const Login = Loadable(lazy(() => import("./pages/authentication/Login")));
 const Register = Loadable(
@@ -81,6 +83,10 @@ const routes = [
     children: [
       {
         path: "",
+        element: <MyProducts />,
+      },
+      {
+        path: "default",
         element: <DashboardSaaS />,
       },
       {

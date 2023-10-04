@@ -1,9 +1,7 @@
 import { Box, Card, Divider, Grid, Button, styled } from "@mui/material";
 import { H3, H6, Small, Tiny } from "components/Typography";
-import UkoAvatar from "components/UkoAvatar";
-import React, { FC } from "react";
+import { FC } from "react";
 
-// component props interface
 interface UserCardProps {
   user: {
     cover: string;
@@ -16,7 +14,6 @@ interface UserCardProps {
   };
 }
 
-// styled components
 const ImageWrapper = styled(Box)(({ theme }) => ({
   height: 100,
   position: "relative",
@@ -32,26 +29,11 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-const StyledAvatar = styled(UkoAvatar)(({ theme }) => ({
-  zIndex: 1,
-  width: 50,
-  height: 50,
-  bottom: -25,
-  position: "absolute",
-  left: "50%",
-  right: "50%",
-  transform: "translateX(-50%)",
-  border: "2px solid",
-  borderColor: theme.palette.background.paper,
-}));
-
-const UserCard: FC<UserCardProps> = ({ user }) => {
+const TemplateItem: FC<UserCardProps> = ({ user }) => {
   return (
     <Card>
       <ImageWrapper>
-        <img src={user.cover} width="100%" height="100%" alt={user.name} />
-
-        <StyledAvatar src={user.avatar} alt={user.name} />
+        <img src={user.cover} width="100%" height="200%" alt={user.name} />
       </ImageWrapper>
 
       <Box
@@ -70,7 +52,7 @@ const UserCard: FC<UserCardProps> = ({ user }) => {
         <Grid marginTop={1} container spacing={3}>
           <Grid item xs={4} textAlign="center">
             <H3>{user.post}</H3>
-            <Small color="text.disabled">Post Avg.</Small>
+            <Small color="text.disabled">Pages</Small>
           </Grid>
           <Grid item xs={4} textAlign="center">
             <H3>{user.follower}</H3>
@@ -117,4 +99,4 @@ const UserCard: FC<UserCardProps> = ({ user }) => {
   );
 };
 
-export default UserCard;
+export default TemplateItem;
