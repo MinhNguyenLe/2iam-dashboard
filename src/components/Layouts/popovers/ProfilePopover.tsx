@@ -4,11 +4,10 @@ import { H6, Small, Tiny } from "components/Typography";
 import UkoAvatar from "components/UkoAvatar";
 import useAuth from "hooks/useAuth";
 import { FC, Fragment, useRef, useState } from "react";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import PopoverLayout from "./PopoverLayout";
+import axios from "utils/axios";
 
-// styled components
 const StyledSmall = styled(Small)(({ theme }) => ({
   display: "block",
   padding: "5px 1rem",
@@ -32,6 +31,11 @@ const ProfilePopover: FC = () => {
     navigate(path);
     setOpen(false);
   };
+
+  const signOut = () =>
+    axios.post("http://localhost:8080/api/logout").then(() => {
+      console.log("logged out");
+    });
 
   return (
     <Fragment>
@@ -96,14 +100,7 @@ const ProfilePopover: FC = () => {
 
           <Divider sx={{ my: 1 }} />
 
-          <StyledSmall
-            onClick={() => {
-              logout();
-              toast.error("You Logout Successfully");
-            }}
-          >
-            Sign Out
-          </StyledSmall>
+          <StyledSmall onClick={signOut}>Sign Out</StyledSmall>
         </Box>
       </PopoverLayout>
     </Fragment>

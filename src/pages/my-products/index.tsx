@@ -1,4 +1,4 @@
-import { Box, Grid, useTheme } from "@mui/material";
+import { Box, Button, Grid, useTheme } from "@mui/material";
 import Analytics from "components/Dashboards/saas/Analytics";
 import SaaSCard from "components/Dashboards/saas/Card";
 import Footer from "components/Dashboards/saas/Footer";
@@ -11,6 +11,7 @@ import EarningIcon from "icons/EarningIcon";
 import PeopleIcon from "icons/PeopleIcon";
 import WindowsLogoIcon from "icons/WindowsLogoIcon";
 import { FC } from "react";
+import axios from "utils/axios";
 
 const MyProducts: FC = () => {
   // change navbar title
@@ -45,8 +46,16 @@ const MyProducts: FC = () => {
     },
   ];
 
+  const test = () =>
+    axios
+      .get("http://localhost:8080/api/iam", { withCredentials: true })
+      .then((r) => console.log(r));
+
   return (
     <Box pt={2} pb={4}>
+      <Button type="button" onClick={test}>
+        Test
+      </Button>
       <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
         {cardList.map((card, index) => (
           <Grid item lg={3} xs={6} key={index}>

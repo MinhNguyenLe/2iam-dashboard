@@ -66,6 +66,10 @@ const Login: FC = () => {
       },
     });
 
+  const loginWithGoogle = () => {
+    window.location.href = "http://localhost:8080/api" + "/auth/google";
+  };
+
   return (
     <FlexBox
       sx={{
@@ -92,7 +96,7 @@ const Login: FC = () => {
 
         <FlexBox justifyContent="space-between" flexWrap="wrap" my="1rem">
           <SocialIconButton
-            // onClick={loginWithGoogle}
+            onClick={loginWithGoogle}
             startIcon={<GoogleIcon sx={{ mr: 1 }} />}
           >
             Sign in with Google
