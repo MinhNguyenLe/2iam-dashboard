@@ -47,9 +47,10 @@ const MyProducts: FC = () => {
   ];
 
   const test = () =>
-    axios
-      .get("http://localhost:8080/api/iam", { withCredentials: true })
-      .then((r) => console.log(r));
+    axios("http://localhost:8080/api/iam", {
+      withCredentials: true,
+      method: "post",
+    }).then((r) => console.log(r));
 
   return (
     <Box pt={2} pb={4}>

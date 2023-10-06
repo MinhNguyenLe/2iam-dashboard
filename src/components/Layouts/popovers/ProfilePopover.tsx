@@ -33,7 +33,10 @@ const ProfilePopover: FC = () => {
   };
 
   const signOut = () =>
-    axios.post("http://localhost:8080/api/logout").then(() => {
+    axios("http://localhost:8080/api/logout", {
+      withCredentials: true,
+      method: "post",
+    }).then(() => {
       console.log("logged out");
     });
 
