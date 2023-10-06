@@ -1,10 +1,9 @@
 import LoadingScreen from "components/LoadingScreen";
-import jwtDecode from "jwt-decode";
+import useLoading from "hooks/useLoading";
 import { createContext, ReactNode, useEffect, useReducer } from "react";
+import toast from "react-hot-toast";
 import axios from "utils/axios";
 
-// All types
-// =============================================
 export type ActionMap<M extends { [index: string]: any }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -19,8 +18,8 @@ export type ActionMap<M extends { [index: string]: any }> = {
 export type AuthUser = null | Record<string, any>;
 
 export type AuthState = {
+  isGettingDefault?: boolean;
   isAuthenticated: boolean;
-  isInitialized: boolean;
   user: AuthUser;
 };
 
@@ -42,20 +41,11 @@ type JWTAuthPayload = {
 };
 
 type JWTActions = ActionMap<JWTAuthPayload>[keyof ActionMap<JWTAuthPayload>];
-// ================================================
 
 const initialState: AuthState = {
   isAuthenticated: false,
-  isInitialized: false,
   user: null,
-};
-
-const isValidToken = (accessToken: string) => {
-  if (!accessToken) return false;
-
-  const decodedToken = jwtDecode<{ exp: number }>(accessToken);
-  const currentTime = Date.now() / 1000;
-  return decodedToken.exp > currentTime;
+  isGettingDefault: true,
 };
 
 const setSession = (accessToken: string | null) => {
@@ -72,7 +62,7 @@ const reducer = (state: AuthState, action: JWTActions) => {
   switch (action.type) {
     case "INIT": {
       return {
-        isInitialized: true,
+        isGettingDefault: false,
         user: action.payload.user,
         isAuthenticated: action.payload.isAuthenticated,
       };
@@ -123,11 +113,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const login = async (email: string, password: string) => {
-    const response = await axios.post("/api/auth/login", {
+    const response: any = await axios.post("/api/auth/login", {
       email,
       password,
     });
-    //@ts-ignore
     const { accessToken, user } = response.data;
 
     setSession(accessToken);
@@ -144,15 +133,13 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     username: string,
     password: string
   ) => {
-    const response = await axios.post("/api/auth/register", {
+    const response: any = await axios.post("/api/auth/register", {
       email,
       username,
       password,
     });
-    // @ts-ignore
     const { accessToken, user } = response.data;
     setSession(accessToken);
-    console.log(response.data);
 
     dispatch({
       type: Types.Register,
@@ -167,36 +154,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     dispatch({ type: Types.Logout });
   };
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const accessToken = window.localStorage.getItem("accessToken");
-
-        if (accessToken && isValidToken(accessToken)) {
-          setSession(accessToken);
-
-          const response = await axios.get("/api/auth/profile");
-          //@ts-ignore
-          const { user } = response.data;
-
-          dispatch({
-            type: Types.Init,
-            payload: {
-              user,
-              isAuthenticated: true,
-            },
-          });
-        } else {
-          dispatch({
-            type: Types.Init,
-            payload: {
-              user: null,
-              isAuthenticated: false,
-            },
-          });
-        }
-      } catch (err) {
-        console.error(err);
+  const { isLoading, fetch } = useLoading({
+    onSuccess: (response) => {
+      if (response?.status === 401) {
         dispatch({
           type: Types.Init,
           payload: {
@@ -204,11 +164,44 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             isAuthenticated: false,
           },
         });
+      } else if (response?.status === 200) {
+        const user = response.data?.user?.oauth?.google;
+        if (!user) {
+          toast.error("Server error: don't return user");
+        }
+        dispatch({
+          type: Types.Init,
+          payload: {
+            user: {
+              avatar: user?.photos?.value,
+              name: user?.displayName,
+            },
+            isAuthenticated: true,
+          },
+        });
       }
-    })();
+    },
+    onError: (err) => {
+      dispatch({
+        type: Types.Init,
+        payload: {
+          user: null,
+          isAuthenticated: false,
+        },
+      });
+    },
+  });
+
+  useEffect(() => {
+    fetch(() =>
+      axios.get("http://localhost:8080/api/iam", {
+        withCredentials: true,
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!state.isInitialized) {
+  if (isLoading) {
     return <LoadingScreen />;
   }
 

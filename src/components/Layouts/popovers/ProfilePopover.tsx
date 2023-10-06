@@ -7,11 +7,32 @@ import { FC, Fragment, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PopoverLayout from "./PopoverLayout";
 import axios from "utils/axios";
+import useLoading from "hooks/useLoading";
+import { LoadingButton } from "@mui/lab";
+import toast from "react-hot-toast";
+import { redirect } from "react-router-dom";
 
 const StyledSmall = styled(Small)(({ theme }) => ({
   display: "block",
   padding: "5px 1rem",
   cursor: "pointer",
+  "&:hover": {
+    color: theme.palette.primary.main,
+    backgroundColor:
+      theme.palette.mode === "light"
+        ? theme.palette.secondary.light
+        : theme.palette.divider,
+  },
+}));
+
+const StyledButton = styled(LoadingButton)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  padding: "5px 1rem",
+  cursor: "pointer",
+  width: "100%",
+  fontWeight: 500,
   "&:hover": {
     color: theme.palette.primary.main,
     backgroundColor:
@@ -27,18 +48,28 @@ const ProfilePopover: FC = () => {
   const { logout, user } = useAuth();
   const [open, setOpen] = useState(false);
 
+  const { isLoading, fetch } = useLoading({
+    onSuccess: () => {
+      logout();
+      redirect("/login");
+    },
+    onError: (error) => {
+      toast.error(error.message);
+    },
+  });
+
   const handleMenuItem = (path: string) => {
     navigate(path);
     setOpen(false);
   };
 
   const signOut = () =>
-    axios("http://localhost:8080/api/logout", {
-      withCredentials: true,
-      method: "post",
-    }).then(() => {
-      console.log("logged out");
-    });
+    fetch(() =>
+      axios("http://localhost:8080/api/logout", {
+        withCredentials: true,
+        method: "post",
+      })
+    );
 
   return (
     <Fragment>
@@ -103,7 +134,9 @@ const ProfilePopover: FC = () => {
 
           <Divider sx={{ my: 1 }} />
 
-          <StyledSmall onClick={signOut}>Sign Out</StyledSmall>
+          <StyledButton loading={isLoading} size="small" onClick={signOut}>
+            Sign Out
+          </StyledButton>
         </Box>
       </PopoverLayout>
     </Fragment>

@@ -49,7 +49,7 @@ const MyProducts: FC = () => {
   const test = () =>
     axios("http://localhost:8080/api/iam", {
       withCredentials: true,
-      method: "post",
+      method: "get",
     }).then((r) => console.log(r));
 
   return (
