@@ -2,6 +2,7 @@ import AuthGuard from "components/authentication/AuthGuard";
 import GuestGuard from "components/authentication/GuestGuard";
 import DashboardLayout from "components/Layouts/DashboardLayout";
 import LoadingScreen from "components/LoadingScreen";
+import CreateTemplate from "pages/CreateTemplate";
 import { FC, lazy, LazyExoticComponent, Suspense } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -12,7 +13,7 @@ const Loadable = (Component: LazyExoticComponent<FC>) => (props: any) =>
     </Suspense>
   );
 
-const MyProducts = Loadable(lazy(() => import("./pages/my-products")));
+const MyProducts = Loadable(lazy(() => import("./pages/MyProducts")));
 
 // authentication pages
 const Login = Loadable(lazy(() => import("./pages/authentication/Login")));
@@ -84,6 +85,10 @@ const routes = [
       {
         path: "",
         element: <MyProducts />,
+      },
+      {
+        path: "create-template/:id",
+        element: <CreateTemplate />,
       },
       {
         path: "default",

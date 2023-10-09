@@ -8,6 +8,7 @@ interface UseLoadingParams {
 
 const useLoading = ({ onSuccess, onError }: UseLoadingParams) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [data, setData] = useState<any>();
 
   async function fetch(cbFetch: () => AxiosPromise<unknown>) {
     setIsLoading(true);
@@ -16,6 +17,7 @@ const useLoading = ({ onSuccess, onError }: UseLoadingParams) => {
       const result = await cbFetch();
 
       onSuccess?.(result);
+      setData(result.data);
       setIsLoading(false);
 
       return result;
@@ -27,7 +29,7 @@ const useLoading = ({ onSuccess, onError }: UseLoadingParams) => {
     }
   }
 
-  return { fetch, isLoading };
+  return { fetch, isLoading, data };
 };
 
 export default useLoading;

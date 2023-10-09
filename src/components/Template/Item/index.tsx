@@ -1,18 +1,6 @@
 import { Box, Card, Divider, Grid, Button, styled } from "@mui/material";
-import { H3, H6, Small, Tiny } from "components/Typography";
-import { FC } from "react";
-
-interface UserCardProps {
-  user: {
-    cover: string;
-    avatar: string;
-    name: string;
-    position: string;
-    post: number;
-    follower: number;
-    following: number;
-  };
-}
+import { H3, H4, Small } from "components/Typography";
+import { Link } from "react-router-dom";
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
   height: 100,
@@ -29,11 +17,20 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
   },
 }));
 
-const TemplateItem: FC<UserCardProps> = ({ user }) => {
+interface TemplateItemProps {
+  template: any;
+}
+
+const TemplateItem = ({ template }: TemplateItemProps) => {
   return (
     <Card>
       <ImageWrapper>
-        <img src={user.cover} width="100%" height="200%" alt={user.name} />
+        <img
+          src="/static/cover/cover-1.png"
+          width="100%"
+          height="100%"
+          alt={template.name}
+        />
       </ImageWrapper>
 
       <Box
@@ -41,26 +38,22 @@ const TemplateItem: FC<UserCardProps> = ({ user }) => {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          marginTop: 5,
+          marginTop: 3,
         }}
       >
-        <H6>{user.name}</H6>
-        <Tiny color="text.disabled" fontWeight={500}>
-          {user.position}
-        </Tiny>
-
-        <Grid marginTop={1} container spacing={3}>
+        <H4>{template.name}</H4>
+        <Grid marginTop={0.1} container spacing={3}>
           <Grid item xs={4} textAlign="center">
-            <H3>{user.post}</H3>
-            <Small color="text.disabled">Pages</Small>
+            <H3>user</H3>
+            <Small color="text.disabled">345234</Small>
           </Grid>
           <Grid item xs={4} textAlign="center">
-            <H3>{user.follower}</H3>
-            <Small color="text.disabled">Followers</Small>
+            <H3>user</H3>
+            <Small color="text.disabled">123124</Small>
           </Grid>
           <Grid item xs={4} textAlign="center">
-            <H3>{user.following}</H3>
-            <Small color="text.disabled">Following</Small>
+            <H3>user</H3>
+            <Small color="text.disabled">11122</Small>
           </Grid>
         </Grid>
       </Box>
@@ -81,7 +74,7 @@ const TemplateItem: FC<UserCardProps> = ({ user }) => {
             variant="outlined"
             style={{ padding: "4px 10px", borderRadius: "24px" }}
           >
-            View demo
+            <Link to={template?.demo}>View demo</Link>
           </Button>
         </Grid>
         <Grid item textAlign="center">
@@ -91,7 +84,9 @@ const TemplateItem: FC<UserCardProps> = ({ user }) => {
             variant="contained"
             style={{ padding: "4px 10px", borderRadius: "24px" }}
           >
-            Start (FREE)
+            <Link to={`/dashboard/create-template/${template.name}`}>
+              Start (FREE)
+            </Link>
           </Button>
         </Grid>
       </Grid>
