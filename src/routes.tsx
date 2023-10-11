@@ -98,7 +98,6 @@ const routes = [
         path: "user-profile",
         element: <UserProfile />,
       },
-
       {
         path: "user-list",
         element: <UserList />,

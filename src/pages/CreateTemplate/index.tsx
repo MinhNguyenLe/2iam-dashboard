@@ -1,12 +1,35 @@
+import { LoadingButton } from "@mui/lab";
 import { Box, Button, Card, Grid } from "@mui/material";
 import LightTextField from "components/LightTextField";
+import LoadingScreen from "components/LoadingScreen";
 import { FormikProvider, useFormik, FieldArray } from "formik";
+import useLoading from "hooks/useLoading";
 import useTitle from "hooks/useTitle";
-import { FC } from "react";
+import { FC, useEffect } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import axios from "utils/axios";
 import * as Yup from "yup";
 
 const CreateTemplate: FC = () => {
   useTitle("Create Template");
+  const navigate = useNavigate();
+
+  const { fetch: verify, isLoading: isVerifying } = useLoading({
+    onError: (error) => {
+      navigate("/dashboard");
+      toast.error(error.message);
+    },
+  });
+
+  useEffect(() => {
+    verify(() =>
+      axios("http://localhost:8080/api/erfjs/verify-duplicate", {
+        withCredentials: true,
+        method: "get",
+      })
+    );
+  }, []);
 
   const initialValues = {
     about_me: {
@@ -50,15 +73,31 @@ const CreateTemplate: FC = () => {
     ),
   });
 
+  const { fetch, isLoading } = useLoading({
+    onError: (error) => {
+      toast.error(error);
+    },
+  });
+
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      return fetch(() =>
+        axios("http://localhost:8080/api/erfjs/insert", {
+          withCredentials: true,
+          method: "post",
+          data: values,
+        })
+      );
     },
   });
   const { values, errors, handleChange, handleSubmit, touched } = formik;
-  console.log(touched, errors);
+
+  if (isVerifying) {
+    return <LoadingScreen />;
+  }
+
   return (
     <Box pt={2} pb={4}>
       <FormikProvider value={formik}>
@@ -304,12 +343,6 @@ const CreateTemplate: FC = () => {
                                 </>
                               )}
                             />
-
-                            <Grid item xs={12}>
-                              <Button type="submit" variant="contained">
-                                Tạo
-                              </Button>
-                            </Grid>
                           </Grid>
                         </Card>
                       </Grid>
@@ -317,6 +350,15 @@ const CreateTemplate: FC = () => {
                   </>
                 )}
               ></FieldArray>
+            </Grid>
+            <Grid item xs={12}>
+              <LoadingButton
+                loading={isLoading}
+                type="submit"
+                variant="contained"
+              >
+                Tạo
+              </LoadingButton>
             </Grid>
           </Card>
         </form>

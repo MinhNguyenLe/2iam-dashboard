@@ -63,7 +63,41 @@ const MyProducts: FC = () => {
           </Grid>
         ))}
       </Grid>
+      <PdfToJsonConverter />
     </Box>
+  );
+};
+
+const PdfToJsonConverter = () => {
+  const { isLoading, fetch, data } = useLoading({
+    onError: (err) => {
+      toast.error(err);
+    },
+    onSuccess: (result) => {
+      console.log(result);
+    },
+  });
+
+  const handleFileChange = async (event: any) => {
+    const file = event?.target?.files[0]; // Get the uploaded PDF file
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("pdf", file);
+
+      fetch(() =>
+        axios.post("http://localhost:8080/api/convert-pdf", formData, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+      );
+    }
+  };
+
+  return (
+    <div>
+      <input type="file" accept=".pdf" onChange={handleFileChange} />
+      {isLoading ? "Loading ..." : <pre>{data?.data?.text}</pre>}
+    </div>
   );
 };
 
