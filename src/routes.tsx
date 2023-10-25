@@ -40,10 +40,17 @@ const UserGrid = Loadable(
 const AddNewUser = Loadable(
   lazy(() => import("./pages/userManagement/AddNewUser"))
 );
+const Resume = Loadable(lazy(() => import("./pages/Resume")));
 
 // error
 const Error = Loadable(lazy(() => import("./pages/404")));
 
+export const routesResume = [
+  {
+    path: "/resume-builder",
+    element: <Resume />,
+  },
+];
 // routes
 const routes = [
   {
