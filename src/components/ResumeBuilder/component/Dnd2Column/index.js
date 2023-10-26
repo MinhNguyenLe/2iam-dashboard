@@ -144,10 +144,7 @@ class Dnd2Column extends Component {
         }
 
         let i = 1;
-        // let lamp = [];
-        // c1.map((item) => {
-        // 	lamp.push(item);
-        // })
+
         c2.map((item) => {
             c1.splice(i, 0, item);
             i = i + 2;
@@ -207,7 +204,7 @@ class Dnd2Column extends Component {
                                                                     provided.draggableProps.style
                                                                 )}
                                                                 className={styles.dragBoxIcon}
-                                                                onClick={() => this.props.removeItem(item.id)}
+                                                                onClick={() => this.props.removeItem(item, index)}
                                                             >
                                                                 <Tooltip title="Remove" arrow distance={20}>
                                                                     <i className={'material-icons ' + styles.dndIcon}>remove</i>
@@ -237,7 +234,7 @@ class Dnd2Column extends Component {
                                             <div ref={provided.innerRef}>
                                                 <div {...provided.draggableProps}>
                                                     <div className={styles.dragBox} style={getdragedStyle(snapshot.isDragging)}>
-                                                        {this.props.renderItem(item)}
+                                                        {this.props.renderItem(item, index)}
                                                         <div
                                                             style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
@@ -266,7 +263,7 @@ class Dnd2Column extends Component {
                                                                     provided.draggableProps.style
                                                                 )}
                                                                 className={styles.dragBoxIcon}
-                                                                onClick={() => this.props.removeItem(item.id)}
+                                                                onClick={() => this.props.removeItem(item, index)}
                                                             >
                                                                 <Tooltip title="Remove" arrow distance={20}>
                                                                     <i className={'material-icons ' + styles.dndIcon}>remove</i>

@@ -4,6 +4,7 @@ import equal from 'deep-equal';
 import { Tooltip } from 'react-tippy';
 
 import styles from './dnd.module.scss';
+import { Util } from 'components/ResumeBuilder/lib';
 
 const getDragIconStyle = (isDragging, draggableStyle) => ({
     userSelect: 'none',
@@ -57,6 +58,7 @@ class Dnd extends Component {
         super(props);
         this.state = {
             data: this.props.data,
+            windowReady: false
         };
         this.onDragEnd = this.onDragEnd.bind(this);
     }
@@ -114,6 +116,18 @@ class Dnd extends Component {
                                         <div ref={provided.innerRef}>
                                             <div {...provided.draggableProps}>
                                                 <div className={styles.dragBox} style={getdragedStyle(snapshot.isDragging)}>
+                                                    {this.state.data.length > 1 && this.props.reorder && (
+                                                        <div
+                                                            {...provided.draggableProps}
+                                                            {...provided.dragHandleProps}
+                                                            style={getDragIconStyle(snapshot.isDragging, provided.draggableProps.style)}
+                                                            className={styles.dragBoxIcon}
+                                                        >
+                                                            <Tooltip title="Change Position" arrow distance={20}>
+                                                                <i className={'material-icons ' + styles.dndIcon}>drag_handle</i>
+                                                            </Tooltip>
+                                                        </div>
+                                                    )}
                                                     {this.props.renderItem(item, index)}
                                                     <div
                                                         style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
@@ -126,21 +140,9 @@ class Dnd extends Component {
                                                     </div>
                                                     {this.state.data.length > 1 && (
                                                         <div
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            style={getDragIconStyle(snapshot.isDragging, provided.draggableProps.style)}
-                                                            className={styles.dragBoxIcon}
-                                                        >
-                                                            <Tooltip title="Change Position" arrow distance={20}>
-                                                                <i className={'material-icons ' + styles.dndIcon}>drag_handle</i>
-                                                            </Tooltip>
-                                                        </div>
-                                                    )}
-                                                    {this.state.data.length > 1 && (
-                                                        <div
                                                             style={getRemoveIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
-                                                            onClick={() => this.props.removeItem(item.id, index, item,)}
+                                                            onClick={() => this.props.removeItem(index, item,)}
                                                         >
                                                             <Tooltip title="Remove" arrow distance={20}>
                                                                 <i className={'material-icons ' + styles.dndIcon}>remove</i>
@@ -162,5 +164,4 @@ class Dnd extends Component {
     }
 }
 
-/* Export Component =============================== */
 export default Dnd;

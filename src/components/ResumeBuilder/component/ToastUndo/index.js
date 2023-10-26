@@ -8,6 +8,7 @@ import styles from './toastUndo.module.scss';
 const ToastUndo = ({ itemId, message, closeToast, data, type, item, pathName }) => {
     let deletedItem;
     if (item) deletedItem = item;
+
     else deletedItem = data.filter(({ id }) => id === itemId);
 
     function handleClick() {
@@ -35,5 +36,4 @@ const ToastUndo = ({ itemId, message, closeToast, data, type, item, pathName }) 
     );
 };
 
-/* Export Component =============================== */
 export default ToastUndo;

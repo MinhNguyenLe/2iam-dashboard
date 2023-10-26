@@ -86,5 +86,4 @@ function WorkExperience(props) {
     );
 }
 
-/* Export Component =============================== */
 export default WorkExperience;

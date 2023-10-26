@@ -7,6 +7,7 @@ import styles from "./one.module.scss";
 
 import { TProps } from "./one";
 import SocialMedia from "./Elements/SocialMedia";
+import Summary from "./Elements/Summary";
 
 class Template extends React.Component<TProps> {
   render() {
@@ -76,6 +77,29 @@ class Template extends React.Component<TProps> {
             placeholder="2iam.net"
           />
           <SocialMedia data={this.props.contact.social_media} />
+        </div>
+
+        <div className={[styles.info, styles.box].join(" ")}>
+          <Text
+            value={this.props.summary.object_title}
+            stateName="summary.object_title"
+            placeholder="Summary"
+            customClass={styles.title}
+            tag="div"
+          />
+          <Summary data={this.props.summary.details} />
+        </div>
+
+        <div className={[styles.skills, styles.box].join(" ")}>
+          <Text
+            value={this.props.skills.object_title}
+            stateName="skills.object_title"
+            placeholder="Skills"
+            customClass={styles.title}
+            tag="div"
+          />
+
+          <Skills data={this.props.skills} />
         </div>
 
         {itemStatus.info && (
@@ -155,20 +179,6 @@ class Template extends React.Component<TProps> {
             <Education data={this.props.education} />
           </div>
         )}
-
-        {itemStatus.skills && (
-          <div className={[styles.skills, styles.box].join(" ")}>
-            <Text
-              value={this.props.userData.skillsTitle}
-              stateName="userData.skillsTitle"
-              placeholder="Skills"
-              customClass={styles.title}
-              tag="div"
-            />
-
-            <Skills data={this.props.skills} />
-          </div>
-        )}
       </div>
     );
   }
@@ -179,10 +189,12 @@ const mapStateToProps = (store: any) => ({
   userData: store.userData,
   workExperience: store.workExperience,
   education: store.education,
-  skills: store.skills,
   itemStatus: store.itemStatus,
+
   iam: store.iam,
   contact: store.contact,
+  summary: store.summary,
+  skills: store.skills,
 });
 
 const mapDispatchToProps = () => ({});

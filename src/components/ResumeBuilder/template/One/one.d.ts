@@ -18,7 +18,10 @@ export interface TProps {
   };
   workExperience: [];
   education: [];
-  skills: [];
+  skills: {
+    object_title: String;
+    lists: Array<{ id: String; name: string; score: string }>;
+  };
   itemStatus: {
     [key: string]: boolean;
   };
@@ -41,5 +44,13 @@ export interface TProps {
       icon: string;
       link: string;
     }>;
+  };
+  summary: {
+    details: Array<{
+      id: string;
+      paragraph: string;
+      lists: Array<{ content: string; id: string }>;
+    }>;
+    object_title: string;
   };
 }

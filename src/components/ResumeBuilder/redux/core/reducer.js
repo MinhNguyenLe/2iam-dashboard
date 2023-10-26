@@ -74,18 +74,23 @@ const initialState = {
                 icon: "",
                 link: ""
             },
-            {
-                id: "2",
-                name: "",
-                icon: "",
-                link: ""
-            }, {
-                id: "3",
-                name: "",
-                icon: "",
-                link: ""
-            }
         ],
+    },
+    summary: {
+        object_title: "Summary",
+        details: [
+            {
+                id: "1",
+                paragraph: "",
+                lists: [{
+                    id: "1", content: ""
+                }]
+            }
+        ]
+    },
+    skills: {
+        object_title: "Skills",
+        lists: [{ id: '1', name: "", score: "" }]
     },
     userData: {
         name: '',
@@ -103,7 +108,6 @@ const initialState = {
     },
     workExperience: [{ id: '1' }],
     education: [{ id: '1' }],
-    skills: [{ id: '1' }],
     theme: {
         color: '#03A9F4',
         fontFamily: 'Source Sans Pro',

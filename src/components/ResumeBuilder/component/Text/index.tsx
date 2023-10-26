@@ -55,7 +55,7 @@ function Text(props: TProps) {
     if (storeComponents[0] === "iam") {
       return appStore.dispatch(updateIam(data));
     }
-    if (storeComponents[0] === "contact") {
+    if (storeComponents[0] === "contact" || storeComponents[0] === "summary") {
       return appStore.dispatch(
         updateByPathName({
           pathName: stateName,
