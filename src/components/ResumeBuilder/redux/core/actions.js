@@ -1,10 +1,44 @@
 import { actionTypes } from './actionTypes';
-import { AppAPI } from '../../lib';
 import Util from '../../lib/Util';
 import AppConfig from '../../constant/config';
 import ApiConst from '../../constant/api';
 
 import { appStore } from '../store';
+
+export const updateByPathName = (data) => {
+    return {
+        type: actionTypes.UPDATE_BY_PATH_NAME,
+        payload: data,
+    };
+};
+
+export const addByPathName = (data) => {
+    return {
+        type: actionTypes.ADD_BY_PATH_NAME,
+        payload: data,
+    };
+};
+
+export const deleteByPathName = (data) => {
+    return {
+        type: actionTypes.DELETE_BY_PATH_NAME,
+        payload: data,
+    };
+};
+
+export const updateContact = (data) => {
+    return {
+        type: actionTypes.UPDATE_CONTACT,
+        payload: data,
+    };
+};
+
+export const updateIam = (data) => {
+    return {
+        type: actionTypes.UPDATE_IAM,
+        payload: data,
+    };
+};
 
 export const updateUserData = (data) => {
     return {

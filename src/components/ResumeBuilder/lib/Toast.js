@@ -14,9 +14,9 @@ const config = {
 };
 
 const Toast = {
-    showUndo: (id, data, type, message = 'item removed') => {
+    showUndo: (id, data, type, message = 'item removed', item, pathName) => {
         toast.dismiss();
-        toast(<ToastUndo itemId={id} data={data} message={message} type={type} />, config);
+        toast(<ToastUndo itemId={id} data={data} message={message} type={type} item={item} pathName={pathName} />, config);
     },
 
     show: (message = '...') => {

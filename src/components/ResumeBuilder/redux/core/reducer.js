@@ -1,11 +1,97 @@
 import { actionTypes } from './actionTypes';
 
+function updateNestedValue(obj, keys, newValue) {
+    let current = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+        if (!current[key]) {
+            if (!isNaN(keys[i + 1])) {
+                current[key] = [];
+            } else {
+                current[key] = {};
+            }
+        }
+        current = current[key];
+    }
+
+    const lastKey = keys[keys.length - 1];
+    if (Array.isArray(current)) {
+        current[parseInt(lastKey, 10)] = newValue;
+    } else {
+        current[lastKey] = newValue;
+    }
+}
+function pushNestedValue(obj, keys, newValue) {
+    let current = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+        if (!current[key]) {
+            current[key] = {};
+        }
+        current = current[key];
+    }
+
+    const lastKey = keys[keys.length - 1];
+    if (Array.isArray(current[lastKey])) {
+        current[lastKey].push(newValue);
+    }
+}
+function removeNestedValue(obj, keys) {
+    let current = obj;
+    for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+        if (current[key] === undefined) {
+            // Path doesn't exist, nothing to remove
+            return;
+        }
+        current = current[key];
+    }
+
+    const lastKey = keys[keys.length - 1];
+    current.splice(lastKey, 1)
+}
+
 const initialState = {
+    iam: {
+        position: "",
+        full_name: "",
+        nickname: "",
+        icon: "",
+        image: ""
+    },
+    contact: {
+        object_title: "Contact",
+        email: "",
+        phone: "",
+        address: "",
+        email_service: "",
+        current_company: "",
+        website: "",
+        social_media: [
+            {
+                id: "1",
+                name: "",
+                icon: "",
+                link: ""
+            },
+            {
+                id: "2",
+                name: "",
+                icon: "",
+                link: ""
+            }, {
+                id: "3",
+                name: "",
+                icon: "",
+                link: ""
+            }
+        ],
+    },
     userData: {
         name: '',
         address: '',
         email: '',
-        mobile: '',
+        phone_number: '',
         userData: '',
         profile: '',
         infoTitle: 'Personal info',
@@ -34,6 +120,73 @@ const initialState = {
 
 export default function core(state = initialState, action) {
     switch (action.type) {
+        case actionTypes.UPDATE_BY_PATH_NAME: {
+            if (!action.payload) return state;
+
+            const newState = JSON.parse(JSON.stringify(state));
+            const { newValue, pathName } = action.payload;
+
+            updateNestedValue(
+                newState,
+                typeof pathName === "string" ? pathName.split(".") : pathName,
+                newValue
+            );
+
+            return newState;
+        }
+
+        case actionTypes.ADD_BY_PATH_NAME: {
+            if (!action.payload) return state;
+
+            const newState = JSON.parse(JSON.stringify(state));
+            const { newValue, pathName } = action.payload;
+
+            pushNestedValue(
+                newState,
+                typeof pathName === "string" ? pathName.split(".") : pathName,
+                newValue
+            );
+
+            return newState;
+        }
+
+        case actionTypes.DELETE_BY_PATH_NAME: {
+            if (!action.payload) return state;
+
+            const newState = JSON.parse(JSON.stringify(state));
+            const { pathName } = action.payload;
+
+            removeNestedValue(
+                newState,
+                typeof pathName === "string" ? pathName.split(".") : pathName,
+            );
+
+            return newState;
+        }
+
+        case actionTypes.UPDATE_CONTACT: {
+            if (!action.payload) return state;
+
+            return {
+                ...state,
+                contact: {
+                    ...state.contact,
+                    ...action.payload,
+                },
+            };
+        }
+
+        case actionTypes.UPDATE_IAM:
+            if (!action.payload) return state;
+
+            return {
+                ...state,
+                iam: {
+                    ...state.iam,
+                    ...action.payload,
+                },
+            };
+
         case actionTypes.UPDATE_USER_DATA:
             if (!action.payload) return state;
 

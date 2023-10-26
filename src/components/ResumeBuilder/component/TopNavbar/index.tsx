@@ -3,16 +3,17 @@ import Tippy from "@tippyjs/react";
 import Switch from "react-switch";
 import Link from "@mui/material/Link";
 import Modal from "react-bootstrap/Modal";
+import axios from "utils/axios";
 
 import AppConfig from "../../constant/config";
 import { appStore } from "../../redux/store";
 import {
   updateTheme,
   updateItemStatus,
-  exportUserData,
   importUserData,
 } from "../../redux/core/actions";
 import Loading from "../Loading";
+import { connect } from "react-redux";
 
 import styles from "./topNavbar.module.scss";
 
@@ -263,6 +264,26 @@ class TopNavbar extends React.Component<TProps, TState> {
     reader.readAsText(e.target.files[0]);
   };
 
+  submitResume = async () => {
+    try {
+      const result = await axios(
+        `${process.env.REACT_APP_API_URL}/users/update-resume`,
+        {
+          withCredentials: true,
+          method: "post",
+          data: {
+            resume: this.props.data,
+            userId: "6530993f771321fde352c36c",
+          },
+        }
+      );
+
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const { theme } = this.props;
     const { bgComplete } = this.state;
@@ -384,7 +405,10 @@ class TopNavbar extends React.Component<TProps, TState> {
               styles.tonNavbarBorderRight,
               styles.tonNavbarFelx1,
             ].join(" ")}
-            onClick={() => this.setState({ saveModal: true })}
+            onClick={() => {
+              console.log(this.props.data)
+              this.setState({ saveModal: true });
+            }}
           >
             <div className={styles.topNavbarSave}>
               <div className={styles.topPart}>
@@ -456,7 +480,11 @@ class TopNavbar extends React.Component<TProps, TState> {
 
               <div
                 className={styles.saveModalBtn}
-                onClick={() => {
+                onClick={async () => {
+                  console.log("loading ...")
+                  await this.submitResume();
+                  console.log("done ...")
+
                   this.setState({ saveModal: false });
                 }}
               >
@@ -510,5 +538,11 @@ class TopNavbar extends React.Component<TProps, TState> {
   }
 }
 
+const mapStateToProps = (state: any) => {
+  return {
+    data: state,
+  };
+};
+
 /* Export Component =============================== */
-export default TopNavbar;
+export default connect(mapStateToProps)(TopNavbar);

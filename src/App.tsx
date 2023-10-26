@@ -22,7 +22,7 @@ const theme = {
 };
 
 const App: FC = () => {
-  const allPages = useRoutes(routes);
+  // const allPages = useRoutes(routes);
   const resume = useRoutes(routesResume);
   console.log(resume);
   // App theme

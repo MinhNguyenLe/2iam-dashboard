@@ -114,11 +114,11 @@ class Dnd extends Component {
                                         <div ref={provided.innerRef}>
                                             <div {...provided.draggableProps}>
                                                 <div className={styles.dragBox} style={getdragedStyle(snapshot.isDragging)}>
-                                                    {this.props.renderItem(item)}
+                                                    {this.props.renderItem(item, index)}
                                                     <div
                                                         style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                         className={styles.dragBoxIcon}
-                                                        onClick={() => this.props.additem()}
+                                                        onClick={() => this.props.addItem()}
                                                     >
                                                         <Tooltip title="Add New Item" arrow distance={20}>
                                                             <i className={'material-icons ' + styles.dndIcon}>add</i>
@@ -140,7 +140,7 @@ class Dnd extends Component {
                                                         <div
                                                             style={getRemoveIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
-                                                            onClick={() => this.props.removeitem(item.id)}
+                                                            onClick={() => this.props.removeItem(item.id, index, item,)}
                                                         >
                                                             <Tooltip title="Remove" arrow distance={20}>
                                                                 <i className={'material-icons ' + styles.dndIcon}>remove</i>

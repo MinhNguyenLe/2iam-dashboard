@@ -30,21 +30,21 @@ function Education(props) {
         <Dnd
             data={data}
             reorder={(e) => _updateEducation(e)}
-            additem={_addNewItem}
-            removeitem={(e) => _removeItem(e, data)}
+            addItem={_addNewItem}
+            removeItem={(e) => _removeItem(e, data)}
             renderItem={(item) => (
                 <div style={{ background: '#fff' }}>
                     <Text
                         value={item.title}
-                        statename="education.title"
-                        stateid={item.id}
+                        stateName="education.title"
+                        stateId={item.id}
                         placeholder="BSc. Software Engineering Harvard"
                     />
                     <Text
                         value={item.date}
-                        statename="education.date"
-                        stateid={item.id}
-                        customclass={styles.educationExplain}
+                        stateName="education.date"
+                        stateId={item.id}
+                        customClass={styles.educationExplain}
                         placeholder="2010 - 2014"
                     />
                 </div>

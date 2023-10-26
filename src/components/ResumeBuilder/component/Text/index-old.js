@@ -29,8 +29,8 @@ class Text extends React.Component {
     };
 
     _onBlur = (e) => {
-        const { statename, stateid } = this.props;
-        const storeComponents = statename.split('.');
+        const { stateName, stateId } = this.props;
+        const storeComponents = stateName.split('.');
 
         const data = {
             [storeComponents[1]]: e.textContent ? e.innerHTML : '',
@@ -39,11 +39,11 @@ class Text extends React.Component {
         if (storeComponents[0] === 'userData') {
             appStore.dispatch(updateUserData(data));
         } else if (storeComponents[0] === 'workExperience') {
-            appStore.dispatch(updateWorkExperienceData(stateid, data));
+            appStore.dispatch(updateWorkExperienceData(stateId, data));
         } else if (storeComponents[0] === 'education') {
-            appStore.dispatch(updateEducationData(stateid, data));
+            appStore.dispatch(updateEducationData(stateId, data));
         } else if (storeComponents[0] === 'skills') {
-            appStore.dispatch(updateSkillData(stateid, data));
+            appStore.dispatch(updateSkillData(stateId, data));
         }
     };
 
@@ -53,7 +53,7 @@ class Text extends React.Component {
     }
 
     render() {
-        const { value, customclass, tag } = this.props;
+        const { value, customClass, tag } = this.props;
         const TagName = tag ? tag : 'p';
         return (
             <>
@@ -63,8 +63,8 @@ class Text extends React.Component {
                     // onInput={(e) => this._onChange(e.currentTarget.textContent)}
                     onBlur={(e) => this._onBlur(e.currentTarget)}
                     dangerouslySetInnerHTML={{ __html: value }}
-                    // className={"contentEditableContainer " + customclass}
-                    className={styles.contentEditableContainer + ' ' + customclass}
+                    // className={"contentEditableContainer " + customClass}
+                    className={styles.contentEditableContainer + ' ' + customClass}
                     {...this.props}
                     // placeholder=""
                 />

@@ -31,17 +31,17 @@ function WorkExperience(props) {
         <Dnd
             data={data}
             reorder={(e) => _updateWorkExperience(e)}
-            additem={_addNewItem}
-            removeitem={(e) => _removeItem(e, data)}
+            addItem={_addNewItem}
+            removeItem={(e) => _removeItem(e, data)}
             renderItem={(item) => (
                 <div className={styles.workBox}>
                     <div className={styles.leftWork}>
                         <Text
                             value={item.date}
-                            statename="workExperience.date"
-                            stateid={item.id}
+                            stateName="workExperience.date"
+                            stateId={item.id}
                             placeholder="May 2018 – May 2019"
-                            customclass={styles.workDate}
+                            customClass={styles.workDate}
                             tag="div"
                         />
                     </div>
@@ -49,33 +49,33 @@ function WorkExperience(props) {
                         <div className={styles.workDot} style={{ '--circle-color': color }} />
                         <Text
                             value={item.jobTitle}
-                            statename="workExperience.jobTitle"
-                            stateid={item.id}
+                            stateName="workExperience.jobTitle"
+                            stateId={item.id}
                             placeholder="React Native Developer"
-                            customclass={styles.workTitle}
+                            customClass={styles.workTitle}
                             tag="div"
                         />
                         <Text
                             value={item.companyName}
-                            statename="workExperience.companyName"
-                            stateid={item.id}
+                            stateName="workExperience.companyName"
+                            stateId={item.id}
                             placeholder="Facebook"
-                            customclass={styles.workCompany}
+                            customClass={styles.workCompany}
                             tag="div"
                         />
                         <Text
                             value={item.companyText}
-                            statename="workExperience.companyText"
-                            stateid={item.id}
-                            customclass={styles.companyExplain}
+                            stateName="workExperience.companyText"
+                            stateId={item.id}
+                            customClass={styles.companyExplain}
                             placeholder="Facebook, Inc. is an American social media and technology company based in Menlo Park, California."
                         />
                         <div className={styles.experienceText}>
                             <Text
                                 value={item.experienceText}
-                                statename="workExperience.experienceText"
-                                stateid={item.id}
-                                customclass={styles.companyExplain}
+                                stateName="workExperience.experienceText"
+                                stateId={item.id}
+                                customClass={styles.companyExplain}
                                 placeholder="- your experience..."
                             />
                         </div>

@@ -1,12 +1,8 @@
-import React from 'react';
-
 import styles from './style.module.scss';
 
-interface TProps {
+export default function Loading(props: {
     show: boolean;
-}
-
-export default function Loading(props: TProps) {
+}) {
     return props.show ? (
         <div className={styles.container}>
             <div className={['verticalCenter', styles.gif].join(' ')}>

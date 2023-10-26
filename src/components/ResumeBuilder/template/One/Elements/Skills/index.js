@@ -32,11 +32,11 @@ function Skills(props) {
         <Dnd2Column
             data={data}
             reorder={(e) => _updateSkill(e)}
-            additem={_addNewItem}
-            removeitem={(e) => _removeItem(e, data)}
+            addItem={_addNewItem}
+            removeItem={(e) => _removeItem(e, data)}
             renderItem={(item) => (
                 <div style={{ background: '#fff' }}>
-                    <Text value={item.title} statename="skills.title" stateid={item.id} placeholder="React Native" />
+                    <Text value={item.title} stateName="skills.title" stateId={item.id} placeholder="React Native" />
                 </div>
             )}
         />

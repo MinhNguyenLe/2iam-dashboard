@@ -182,7 +182,7 @@ class Dnd2Column extends Component {
                                                         <div
                                                             style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
-                                                            onClick={() => this.props.additem()}
+                                                            onClick={() => this.props.addItem()}
                                                         >
                                                             <Tooltip title="Add New Item" arrow distance={20}>
                                                                 <i className={'material-icons ' + styles.dndIcon}>add</i>
@@ -207,7 +207,7 @@ class Dnd2Column extends Component {
                                                                     provided.draggableProps.style
                                                                 )}
                                                                 className={styles.dragBoxIcon}
-                                                                onClick={() => this.props.removeitem(item.id)}
+                                                                onClick={() => this.props.removeItem(item.id)}
                                                             >
                                                                 <Tooltip title="Remove" arrow distance={20}>
                                                                     <i className={'material-icons ' + styles.dndIcon}>remove</i>
@@ -241,7 +241,7 @@ class Dnd2Column extends Component {
                                                         <div
                                                             style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
-                                                            onClick={() => this.props.additem()}
+                                                            onClick={() => this.props.addItem()}
                                                         >
                                                             <Tooltip title="Add New Item" arrow distance={20}>
                                                                 <i className={'material-icons ' + styles.dndIcon}>add</i>
@@ -266,7 +266,7 @@ class Dnd2Column extends Component {
                                                                     provided.draggableProps.style
                                                                 )}
                                                                 className={styles.dragBoxIcon}
-                                                                onClick={() => this.props.removeitem(item.id)}
+                                                                onClick={() => this.props.removeItem(item.id)}
                                                             >
                                                                 <Tooltip title="Remove" arrow distance={20}>
                                                                     <i className={'material-icons ' + styles.dndIcon}>remove</i>
