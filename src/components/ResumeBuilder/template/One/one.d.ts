@@ -3,26 +3,11 @@ export interface TProps {
     color: string;
     fontFamily: string;
   };
-  userData: {
-    name: string;
-    infoTitle: string;
-    address: string;
-    email: string;
-    mobile: string;
-    userData: string;
-    profileTitle: string;
-    profile: string;
-    workExperienceTitle: string;
-    educationTitle: string;
-    skillsTitle: string;
-  };
-  itemStatus: {
-    [key: string]: boolean;
-  };
   iam: {
     full_name: string;
     nickname: string;
     position: string;
+    image: string;
   };
   contact: {
     object_title: string;

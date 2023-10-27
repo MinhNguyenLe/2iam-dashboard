@@ -18,6 +18,7 @@ import { connect } from "react-redux";
 import styles from "./topNavbar.module.scss";
 
 import { TProps, TState } from "./topNavbar";
+import { removeIdDeep } from "components/ResumeBuilder/lib/utils";
 
 class TopNavbar extends React.Component<TProps, TState> {
   constructor(props: TProps) {
@@ -406,7 +407,7 @@ class TopNavbar extends React.Component<TProps, TState> {
               styles.tonNavbarFelx1,
             ].join(" ")}
             onClick={() => {
-              console.log(this.props.data)
+              console.log(removeIdDeep(this.props.data));
               this.setState({ saveModal: true });
             }}
           >
@@ -481,9 +482,9 @@ class TopNavbar extends React.Component<TProps, TState> {
               <div
                 className={styles.saveModalBtn}
                 onClick={async () => {
-                  console.log("loading ...")
+                  console.log("loading ...");
                   await this.submitResume();
-                  console.log("done ...")
+                  console.log("done ...");
 
                   this.setState({ saveModal: false });
                 }}

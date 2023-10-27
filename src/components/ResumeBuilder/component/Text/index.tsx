@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { appStore } from "../../redux/store";
-import {
-  updateUserData,
-  updateWorkExperienceData,
-  updateEducationData,
-  updateSkillData,
-  updateIam,
-  updateContact,
-  updateByPathName,
-} from "../../redux/core/actions";
+import { updateIam, updateByPathName } from "../../redux/core/actions";
 
 import { Util } from "components/ResumeBuilder/lib";
 
@@ -33,7 +25,7 @@ const defaultProps: TProps = {
   tag: "p",
 };
 
-function Text(props: TProps) {
+function Text({ stateName, value, customClass, tag, ...props }: TProps) {
   const [editable, setEditable] = useState(true);
 
   useEffect(() => {
@@ -45,35 +37,16 @@ function Text(props: TProps) {
   }, []);
 
   const _onBlur = (e: any) => {
-    const { stateName, stateId } = props;
-    const storeComponents = stateName.split(".");
-
-    const data = {
-      [storeComponents[1]]: e.textContent ? e.innerHTML : "",
-    };
-
-    if (storeComponents[0] === "iam") {
-      return appStore.dispatch(updateIam(data));
-    }
-
-    if (storeComponents[0] === "userData") {
-      appStore.dispatch(updateUserData(data));
-    } else if (storeComponents[0] === "workExperience") {
-      appStore.dispatch(updateWorkExperienceData(stateId, data));
-    } else if (storeComponents[0] === "education") {
-      appStore.dispatch(updateEducationData(stateId, data));
-    } else {
-      appStore.dispatch(
-        updateByPathName({
-          pathName: stateName,
-          newValue: e.textContent ? e.innerHTML : "",
-        })
-      );
-    }
+    appStore.dispatch(
+      updateByPathName({
+        pathName: stateName,
+        newValue: e.textContent ? e.innerHTML : "",
+      })
+    );
   };
 
-  const { value, customClass, tag } = props;
   const TagName = tag ? tag : "p";
+  
   return (
     <TagName
       contentEditable={editable}
@@ -81,7 +54,7 @@ function Text(props: TProps) {
       onBlur={(e: any) => _onBlur(e.currentTarget)}
       dangerouslySetInnerHTML={{ __html: value }}
       className={styles.contentEditableContainer + " " + customClass}
-      {...(props as any)}
+      {...props}
     />
   );
 }

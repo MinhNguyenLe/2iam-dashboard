@@ -1,7 +1,3 @@
-// import { combineReducers } from 'redux';
-import core from './core/reducer'; //put any name
+import core from './core/reducer';
 
-// const rootReducer = combineReducers({
-//     core: core
-// })
 export default core;

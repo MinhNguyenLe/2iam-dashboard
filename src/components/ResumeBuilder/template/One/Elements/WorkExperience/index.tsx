@@ -40,7 +40,6 @@ function WorkExperience({ data, color }: any) {
             <Text
               value={item.period}
               stateName={`experiences.lists.${index}.period`}
-              stateId={item.id}
               placeholder="Dec 2022 – Present"
               customClass={styles.workDate}
               tag="div"
@@ -55,7 +54,6 @@ function WorkExperience({ data, color }: any) {
             <Text
               value={item.position}
               stateName={`experiences.lists.${index}.position`}
-              stateId={item.id}
               placeholder="Software Engineer"
               customClass={styles.workTitle}
               tag="div"
@@ -63,7 +61,6 @@ function WorkExperience({ data, color }: any) {
             <Text
               value={item.company.name}
               stateName={`experiences.lists.${index}.company.name`}
-              stateId={item.id}
               placeholder="bTaskee"
               customClass={styles.workCompany}
               tag="div"
@@ -71,7 +68,6 @@ function WorkExperience({ data, color }: any) {
             <Text
               value={item.company.address}
               stateName={`experiences.lists.${index}.company.address`}
-              stateId={item.id}
               customClass={styles.companyExplain}
               placeholder="Ho Chi Minh - Vietnam"
               tag="div"
@@ -79,7 +75,6 @@ function WorkExperience({ data, color }: any) {
             <Text
               value={item.company.link}
               stateName={`experiences.lists.${index}.company.link`}
-              stateId={item.id}
               customClass={styles.companyExplain}
               placeholder="https://www.btaskee.com/"
               tag="div"
@@ -87,7 +82,6 @@ function WorkExperience({ data, color }: any) {
             <Text
               value={item.company.skills}
               stateName={`experiences.lists.${index}.skills`}
-              stateId={item.id}
               customClass={styles.companyExplain}
               placeholder="C++, Java (separated by commas when fill multiple skills)"
               tag="div"
@@ -109,7 +103,6 @@ function WorkExperience({ data, color }: any) {
                   <Text
                     value={item.paragraph}
                     stateName={`experiences.lists.${index}.details.${indexDetails}.paragraph`}
-                    stateId={item.id}
                     customClass={styles.companyExplain}
                     placeholder="I work as leader or BE teams and design architecture, clean architecture for legacy source code, cover all of workload in my teams"
                   />
@@ -124,7 +117,6 @@ function WorkExperience({ data, color }: any) {
                         <Text
                           value={item.content}
                           stateName={`experiences.lists.${index}.details.${indexDetails}.lists.${indexLists}.content`}
-                          stateId={item.id}
                           customClass={styles.companyExplain}
                           placeholder="Write proxy when launch for multiple arias"
                         />

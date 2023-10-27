@@ -11,7 +11,6 @@ import Summary from "./Elements/Summary";
 
 class Template extends React.Component<TProps> {
   render() {
-    const { itemStatus } = this.props;
     return (
       <div className={styles.insideCon}>
         <div>
@@ -37,11 +36,9 @@ class Template extends React.Component<TProps> {
           style={{ borderTopColor: this.props.theme.color }}
         />
 
-        {itemStatus.picture && (
-          <div className={styles.image}>
-            <Photo userData={this.props.userData} />
-          </div>
-        )}
+        <div className={styles.image}>
+          <Photo photo={this.props.iam.image} />
+        </div>
 
         <div className={[styles.info, styles.box].join(" ")}>
           <Text
@@ -132,9 +129,6 @@ class Template extends React.Component<TProps> {
 
 const mapStateToProps = (store: any) => ({
   theme: store.theme,
-  userData: store.userData,
-  itemStatus: store.itemStatus,
-  
   iam: store.iam,
   contact: store.contact,
   summary: store.summary,
