@@ -1,8 +1,4 @@
 export interface TProps {
-  theme: {
-    color: string;
-    fontFamily: string;
-  };
   iam: {
     full_name: string;
     nickname: string;

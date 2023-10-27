@@ -8,8 +8,7 @@ import { ukoTheme } from "./theme";
 import { ToastContainer } from "react-toastify";
 
 import { Provider } from "react-redux";
-import { appStore } from "components/ResumeBuilder/redux/store";
-import { persistStore } from "redux-persist";
+import { appStore, persistor } from "components/ResumeBuilder/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { ThemeProvider as ThemeProviderStyled } from "styled-components";
@@ -22,13 +21,11 @@ const theme = {
 };
 
 const App: FC = () => {
-  // const allPages = useRoutes(routes);
+  const allPages = useRoutes(routes);
   const resume = useRoutes(routesResume);
-  console.log(resume);
-  // App theme
+
   const appTheme = ukoTheme();
 
-  // toaster options
   const toasterOptions = {
     style: {
       fontWeight: 500,
@@ -36,24 +33,27 @@ const App: FC = () => {
     },
   };
 
-  return (
-    <>
-      {/* <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={appTheme}>
-          <CssBaseline />
-          <Toaster toastOptions={toasterOptions} />
-          {allPages}
-        </ThemeProvider>
-      </StyledEngineProvider> */}
+  if (window.location.pathname.replace("/", "") === "resume-builder") {
+    return (
       <>
         <Provider store={appStore}>
-          <PersistGate persistor={persistStore(appStore)}>
+          <PersistGate persistor={persistor}>
             <ThemeProviderStyled theme={theme}>{resume}</ThemeProviderStyled>
           </PersistGate>
         </Provider>
         <ToastContainer />
       </>
-    </>
+    );
+  }
+
+  return (
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={appTheme}>
+        <CssBaseline />
+        <Toaster toastOptions={toasterOptions} />
+        {allPages}
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 };
 

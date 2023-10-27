@@ -65,7 +65,7 @@ const ProfilePopover: FC = () => {
 
   const signOut = () =>
     fetch(() =>
-      axios("http://localhost:8080/api/logout", {
+      axios(`${process.env.REACT_APP_API_URL}/logout`, {
         withCredentials: true,
         method: "post",
       })

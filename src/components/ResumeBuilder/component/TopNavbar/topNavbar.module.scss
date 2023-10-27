@@ -1,12 +1,12 @@
 @import '../../theme/colors';
 
 .TopNavbar {
-    width: 200mm;
+    width: 24mm;
     background: #252525;
     position: fixed;
     height: 80px;
     top: 60px;
-    left: 50%;
+    left: calc(50% + 100mm);
     z-index: 3;
     transform: translate(-50%, -50%);
     border-radius: 10px;
@@ -91,8 +91,8 @@
     box-sizing: content-box;
 }
 
-.tonNavbarFelx1 {
-    flex: 0.8;
+.tonNavbarFlex1 {
+    flex: 1;
     padding: 10px;
     text-align: center;
 }

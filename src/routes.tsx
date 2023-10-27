@@ -48,7 +48,11 @@ const Error = Loadable(lazy(() => import("./pages/404")));
 export const routesResume = [
   {
     path: "/resume-builder",
-    element: <Resume />,
+    element: (
+      <AuthGuard>
+        <Resume />
+      </AuthGuard>
+    ),
   },
 ];
 // routes

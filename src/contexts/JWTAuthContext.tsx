@@ -194,7 +194,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
   useEffect(() => {
     fetch(() =>
-      axios.get("http://localhost:8080/api/iam", {
+      axios.get(`${process.env.REACT_APP_API_URL}/iam`, {
         withCredentials: true,
       })
     );

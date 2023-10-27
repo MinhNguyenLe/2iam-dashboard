@@ -24,7 +24,7 @@ const CreateTemplate: FC = () => {
 
   useEffect(() => {
     verify(() =>
-      axios("http://localhost:8080/api/erfjs/verify-duplicate", {
+      axios(`${process.env.REACT_APP_API_URL}/erfjs/verify-duplicate`, {
         withCredentials: true,
         method: "get",
       })
@@ -84,7 +84,7 @@ const CreateTemplate: FC = () => {
     validationSchema,
     onSubmit: (values) => {
       return fetch(() =>
-        axios("http://localhost:8080/api/erfjs/insert", {
+        axios(`${process.env.REACT_APP_API_URL}/erfjs/insert`, {
           withCredentials: true,
           method: "post",
           data: values,

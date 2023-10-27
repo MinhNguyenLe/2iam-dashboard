@@ -33,7 +33,7 @@ class Template extends React.Component<TProps> {
         </div>
         <div
           className={styles.underName}
-          style={{ borderTopColor: this.props.theme.color }}
+          style={{ borderTopColor: "#03A9F4" }}
         />
 
         <div className={styles.image}>
@@ -117,10 +117,7 @@ class Template extends React.Component<TProps> {
             customClass={styles.title}
             tag="div"
           />
-          <WorkExperience
-            data={this.props.experiences.lists}
-            color={this.props.theme.color}
-          />
+          <WorkExperience data={this.props.experiences.lists} />
         </div>
       </div>
     );
@@ -128,7 +125,6 @@ class Template extends React.Component<TProps> {
 }
 
 const mapStateToProps = (store: any) => ({
-  theme: store.theme,
   iam: store.iam,
   contact: store.contact,
   summary: store.summary,

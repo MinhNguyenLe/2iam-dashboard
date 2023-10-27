@@ -2,7 +2,7 @@ import { Text } from "components/ResumeBuilder/component";
 import styles from "./experience.module.scss";
 import DndController from "../DndController";
 
-function WorkExperience({ data, color }: any) {
+function WorkExperience({ data }: any) {
   return (
     <DndController
       data={data}
@@ -49,7 +49,7 @@ function WorkExperience({ data, color }: any) {
             <div
               className={styles.workDot}
               // @ts-ignore
-              style={{ "--circle-color": color }}
+              style={{ "--circle-color": "#03A9F4" }}
             />
             <Text
               value={item.position}

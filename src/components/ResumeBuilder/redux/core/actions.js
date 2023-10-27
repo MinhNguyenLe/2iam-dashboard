@@ -30,46 +30,6 @@ export const updateUserData = (data) => {
     };
 };
 
-export const updateTheme = (data) => {
-    return {
-        type: actionTypes.UPDATE_THEME,
-        payload: data,
-    };
-};
-
-export const updateItemStatus = (data) => {
-    return {
-        type: actionTypes.UPDATE_ITEM_STATUS,
-        payload: data,
-    };
-};
-
-export const exportUserData = () => {
-    return (dispatch, getState) => {
-        const userData = getState().userData;
-        const workExperience = getState().workExperience;
-        const education = getState().education;
-        const skills = getState().skills;
-        const theme = getState().theme;
-        const itemStatus = getState().itemStatus;
-
-        let data = [];
-        data = {
-            userData,
-            workExperience,
-            education,
-            skills,
-            theme,
-            itemStatus,
-        };
-
-        return data;
-    };
-};
-
-export const importUserData = (data) => {
-};
-
 export const uploadImageAction = (image) => {
     return () =>
         new Promise((resolve, reject) => {

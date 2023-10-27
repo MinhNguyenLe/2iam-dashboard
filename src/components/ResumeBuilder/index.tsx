@@ -8,46 +8,19 @@ import "react-toastify/dist/ReactToastify.css";
 import "./theme/main.scss";
 
 import React from "react";
-import { connect } from "react-redux";
-
 import styles from "./style.module.scss";
 import TopNavbar from "./component/TopNavbar";
 import One from "./template/One";
 
-interface TProps {
-  theme: {
-    color: string;
-    fontFamily: string;
-  };
-  itemStatus: {
-    [key: string]: boolean;
-  };
-  userData: {
-    [key: string]: string;
-  };
-}
-
-class Home extends React.Component<TProps> {
-  constructor(props: TProps) {
-    super(props);
-    this.state = {};
-  }
-
+class Home extends React.Component {
   render() {
     return (
-      <div style={{ fontFamily: this.props.theme.fontFamily }}>
-        <div
-          className={styles.loading}
-          style={{ background: this.props.theme.color }}
-        >
+      <div style={{ fontFamily: "Source Sans Pro" }}>
+        <div className={styles.loading} style={{ background: "#03A9F4" }}>
           <div className={styles.loading_gradient}></div>
         </div>
 
-        <TopNavbar
-          itemStatus={this.props.itemStatus}
-          theme={this.props.theme}
-          userData={this.props.userData}
-        />
+        <TopNavbar />
 
         <div className={styles.container}>
           <One />
@@ -57,12 +30,4 @@ class Home extends React.Component<TProps> {
   }
 }
 
-const mapStateToProps = (store: any) => ({
-  theme: store.theme,
-  userData: store.userData,
-  itemStatus: store.itemStatus,
-});
-
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home

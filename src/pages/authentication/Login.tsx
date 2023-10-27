@@ -67,7 +67,7 @@ const Login: FC = () => {
     });
 
   const loginWithGoogle = () => {
-    window.location.href = "http://localhost:8080/api" + "/auth/google";
+    window.location.href = process.env.REACT_APP_API_URL + "/auth/google";
   };
 
   return (

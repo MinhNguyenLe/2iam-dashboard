@@ -38,7 +38,7 @@ const MyProducts: FC = () => {
 
   useEffect(() => {
     fetch(() =>
-      axios("http://localhost:8080/api/templates/all", {
+      axios(`${process.env.REACT_APP_API_URL}/templates/all`, {
         withCredentials: true,
         method: "get",
       })
@@ -86,7 +86,7 @@ const PdfToJsonConverter = () => {
       formData.append("pdf", file);
 
       fetch(() =>
-        axios.post("http://localhost:8080/api/convert-pdf", formData, {
+        axios.post(`${process.env.REACT_APP_API_URL}/convert-pdf`, formData, {
           headers: { "Content-Type": "multipart/form-data" },
         })
       );

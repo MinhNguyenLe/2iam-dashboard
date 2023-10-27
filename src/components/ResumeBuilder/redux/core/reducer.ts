@@ -15,7 +15,7 @@ const initialState = {
   contact: {
     object_title: "Contact",
     email: "",
-    phone: "",
+    phone_number: "",
     address: "",
     email_service: "",
     current_company: "",
@@ -93,10 +93,6 @@ const initialState = {
       },
     ],
   },
-  theme: {
-    color: "#03A9F4",
-    fontFamily: "Source Sans Pro",
-  },
 };
 
 export default function core(
@@ -147,7 +143,7 @@ export default function core(
 
       return newState;
     }
-
+    
     default:
       return { ...state };
   }

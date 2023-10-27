@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { appStore } from "../../redux/store";
-import { updateIam, updateByPathName } from "../../redux/core/actions";
+import { updateByPathName } from "../../redux/core/actions";
 
 import { Util } from "components/ResumeBuilder/lib";
 
@@ -46,7 +46,7 @@ function Text({ stateName, value, customClass, tag, ...props }: TProps) {
   };
 
   const TagName = tag ? tag : "p";
-  
+
   return (
     <TagName
       contentEditable={editable}
