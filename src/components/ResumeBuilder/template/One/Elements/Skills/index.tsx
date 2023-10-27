@@ -1,44 +1,23 @@
-import { useDispatch } from "react-redux";
-import { Toast, Util } from "components/ResumeBuilder/lib";
-import { Text, Dnd2Column } from "components/ResumeBuilder/component";
-import {
-  addByPathName,
-  updateByPathName,
-  deleteByPathName,
-} from "../../../../redux/core/actions";
+import { Text } from "components/ResumeBuilder/component";
+import DndController from "../DndController";
+import styles from "./skills.module.scss";
 
 function Skills({ data }: any) {
-  const dispatch = useDispatch();
-
   return (
-    <Dnd2Column
+    <DndController
       data={data}
-      reorder={(data: any) => {
-        dispatch(
-          updateByPathName({ pathName: "skills.lists", newValue: data })
-        );
-      }}
-      addItem={() => {
-        dispatch(
-          addByPathName({
-            pathName: "skills.lists",
-            newValue: { name: "", score: "", id: Util.randomId() },
-          })
-        );
-      }}
-      removeItem={(item: any, index: number) => {
-        Toast.showUndoMessage({ data, item, pathName: "skills.lists" });
-        dispatch(deleteByPathName({ pathName: `skills.lists.${index}` }));
-      }}
+      pathName="skills.lists"
+      defaultNewValue={{ name: "", score: "" }}
       renderItem={(item: any, index: number) => (
         <div style={{ background: "#fff" }}>
           <Text
             value={item.name}
             stateName={`skills.lists.${index}.name`}
             stateId={item.id}
-            placeholder="React Native"
+            placeholder="React"
           />
           <Text
+            className={styles.subTitle}
             value={item.score}
             stateName={`skills.lists.${index}.score`}
             stateId={item.id}

@@ -90,7 +90,7 @@ class Template extends React.Component<TProps> {
           <Summary data={this.props.summary.details} />
         </div>
 
-        <div className={[styles.skills, styles.box].join(" ")}>
+        <div className={[styles.info, styles.box].join(" ")}>
           <Text
             value={this.props.skills.object_title}
             stateName="skills.object_title"
@@ -98,87 +98,33 @@ class Template extends React.Component<TProps> {
             customClass={styles.title}
             tag="div"
           />
-
-          <Skills data={this.props.skills} />
+          <Skills data={this.props.skills.lists} />
         </div>
 
-        {itemStatus.info && (
-          <div className={[styles.info, styles.box].join(" ")}>
-            <Text
-              value={this.props.userData.infoTitle}
-              stateName="userData.infoTitle"
-              placeholder="Personal info"
-              customClass={styles.title}
-              tag="div"
-            />
-            <Text
-              value={this.props.userData.address}
-              stateName="userData.address"
-              placeholder="address: Berlin, Germany"
-            />
-            <Text
-              value={this.props.userData.email}
-              stateName="userData.email"
-              placeholder="sample@email.com"
-            />
-            <Text
-              value={this.props.userData.mobile}
-              stateName="userData.mobile"
-              placeholder="(+1) 123 456 7890"
-            />
-            <Text
-              value={this.props.userData.userData}
-              stateName="userData.userData"
-              placeholder="Your other data"
-            />
-          </div>
-        )}
+        <div className={[styles.box].join(" ")}>
+          <Text
+            value={this.props.educations.object_title}
+            stateName="educations.object_title"
+            placeholder="Educations"
+            customClass={styles.title}
+            tag="div"
+          />
+          <Education data={this.props.educations.lists} />
+        </div>
 
-        {itemStatus.profile && (
-          <div className={[styles.profile, styles.box].join(" ")}>
-            <Text
-              value={this.props.userData.profileTitle}
-              stateName="userData.profileTitle"
-              placeholder="Profile"
-              customClass={styles.title}
-              tag="div"
-            />
-            <Text
-              value={this.props.userData.profile}
-              stateName="userData.profile"
-              placeholder="I'm a full-stack developer..."
-            />
-          </div>
-        )}
-
-        {itemStatus.workExperience && (
-          <div className={[styles.workExperience, styles.box].join(" ")}>
-            <Text
-              value={this.props.userData.workExperienceTitle}
-              stateName="userData.workExperienceTitle"
-              placeholder="Work experience"
-              customClass={styles.title}
-              tag="div"
-            />
-            <WorkExperience
-              data={this.props.workExperience}
-              color={this.props.theme.color}
-            />
-          </div>
-        )}
-
-        {itemStatus.education && (
-          <div className={[styles.education, styles.box].join(" ")}>
-            <Text
-              value={this.props.userData.educationTitle}
-              stateName="userData.educationTitle"
-              placeholder="Education"
-              customClass={styles.title}
-              tag="div"
-            />
-            <Education data={this.props.education} />
-          </div>
-        )}
+        <div className={[styles.box].join(" ")}>
+          <Text
+            value={this.props.experiences.object_title}
+            stateName="experiences.object_title"
+            placeholder="Experiences"
+            customClass={styles.title}
+            tag="div"
+          />
+          <WorkExperience
+            data={this.props.experiences.lists}
+            color={this.props.theme.color}
+          />
+        </div>
       </div>
     );
   }
@@ -187,14 +133,14 @@ class Template extends React.Component<TProps> {
 const mapStateToProps = (store: any) => ({
   theme: store.theme,
   userData: store.userData,
-  workExperience: store.workExperience,
-  education: store.education,
   itemStatus: store.itemStatus,
-
+  
   iam: store.iam,
   contact: store.contact,
   summary: store.summary,
   skills: store.skills,
+  educations: store.educations,
+  experiences: store.experiences,
 });
 
 const mapDispatchToProps = () => ({});

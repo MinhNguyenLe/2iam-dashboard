@@ -175,7 +175,7 @@ class Dnd2Column extends Component {
                                             <div ref={provided.innerRef}>
                                                 <div {...provided.draggableProps}>
                                                     <div className={styles.dragBox} style={getdragedStyle(snapshot.isDragging)}>
-                                                        {this.props.renderItem(item)}
+                                                        {this.props.renderItem(item, index)}
                                                         <div
                                                             style={getAddIconStyle(snapshot.isDragging, provided.draggableProps.style)}
                                                             className={styles.dragBoxIcon}
@@ -286,5 +286,4 @@ class Dnd2Column extends Component {
     }
 }
 
-/* Export Component =============================== */
 export default Dnd2Column;

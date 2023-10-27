@@ -16,12 +16,6 @@ export interface TProps {
     educationTitle: string;
     skillsTitle: string;
   };
-  workExperience: [];
-  education: [];
-  skills: {
-    object_title: String;
-    lists: Array<{ id: String; name: string; score: string }>;
-  };
   itemStatus: {
     [key: string]: boolean;
   };
@@ -52,5 +46,45 @@ export interface TProps {
       lists: Array<{ content: string; id: string }>;
     }>;
     object_title: string;
+  };
+  skills: {
+    object_title: string;
+    lists: Array<{ id: string; name: string; score: string }>;
+  };
+  educations: {
+    object_title: string;
+    lists: Array<{
+      id: string;
+      major: string;
+      training_place: {
+        name: string;
+        logo: string;
+        link: string;
+        image: string;
+      };
+      learning_time: string;
+      score: string;
+      status: string;
+      details: Array<{ id: string; paragraph: string }>;
+    }>;
+  };
+  experiences: {
+    object_title: string;
+    lists: Array<{
+      id: string;
+      position: string;
+      company: {
+        name: string;
+        address: string;
+        link: string;
+      };
+      period: string;
+      skills: string;
+      details: Array<{
+        id: string;
+        paragraph: string;
+        lists: Array<{ content: string; id: string }>;
+      }>;
+    }>;
   };
 }

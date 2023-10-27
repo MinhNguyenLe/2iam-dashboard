@@ -92,6 +92,44 @@ const initialState = {
         object_title: "Skills",
         lists: [{ id: '1', name: "", score: "" }]
     },
+    educations: {
+        object_title: "Educations",
+        lists: [{
+            id: "1",
+            major: "",
+            score: "",
+            status: "",
+            learning_time: "",
+            training_place: {
+                name: "",
+                link: ""
+            },
+            details: [{ id: '1', paragraph: "" }]
+        }]
+    },
+    experiences: {
+        object_title: "Experiences",
+        lists: [{
+            id: "1",
+            position: "",
+            period: "",
+            company: {
+                name: "",
+                address: "",
+                link: ""
+            },
+            skills: "",
+            details: [
+                {
+                    id: "1",
+                    paragraph: "",
+                    lists: [{
+                        id: "1", content: ""
+                    }]
+                }
+            ]
+        }]
+    },
     userData: {
         name: '',
         address: '',
@@ -106,8 +144,6 @@ const initialState = {
         skillsTitle: 'Skills',
         photo: 'images/nobody.jpg',
     },
-    workExperience: [{ id: '1' }],
-    education: [{ id: '1' }],
     theme: {
         color: '#03A9F4',
         fontFamily: 'Source Sans Pro',

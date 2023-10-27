@@ -55,14 +55,6 @@ function Text(props: TProps) {
     if (storeComponents[0] === "iam") {
       return appStore.dispatch(updateIam(data));
     }
-    if (storeComponents[0] === "contact" || storeComponents[0] === "summary") {
-      return appStore.dispatch(
-        updateByPathName({
-          pathName: stateName,
-          newValue: e.textContent ? e.innerHTML : "",
-        })
-      );
-    }
 
     if (storeComponents[0] === "userData") {
       appStore.dispatch(updateUserData(data));
@@ -70,8 +62,13 @@ function Text(props: TProps) {
       appStore.dispatch(updateWorkExperienceData(stateId, data));
     } else if (storeComponents[0] === "education") {
       appStore.dispatch(updateEducationData(stateId, data));
-    } else if (storeComponents[0] === "skills") {
-      appStore.dispatch(updateSkillData(stateId, data));
+    } else {
+      appStore.dispatch(
+        updateByPathName({
+          pathName: stateName,
+          newValue: e.textContent ? e.innerHTML : "",
+        })
+      );
     }
   };
 
