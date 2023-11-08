@@ -47,8 +47,8 @@ const TopNavbar = () => {
             <div
               className={styles.saveModalBtn}
               onClick={async () => {
-                await updateResume();
                 setSaveModal(false);
+                await updateResume();
               }}
             >
               SAVE

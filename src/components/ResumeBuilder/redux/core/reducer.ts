@@ -143,7 +143,11 @@ export default function core(
 
       return newState;
     }
-    
+
+    case actionTypes.CLEAR_PERSIST: {
+      return initialState;
+    }
+
     default:
       return { ...state };
   }

@@ -12,6 +12,7 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ScrollBar from "simplebar-react";
 import topMenuList from "./topMenuList";
+import { useTranslation } from "react-i18next";
 
 // root component interface
 interface SideNavBarProps {
@@ -47,6 +48,8 @@ const DashboardSideBar: FC<SideNavBarProps> = ({
   showMobileSideBar,
   closeMobileSideBar,
 }) => {
+  const {t} = useTranslation();
+
   const navigate = useNavigate();
 
   const [active, setActive] = useState("My products");
@@ -68,7 +71,7 @@ const DashboardSideBar: FC<SideNavBarProps> = ({
 
       <ScrollBar style={{ maxHeight: "calc(100% - 50px)" }}>
         {topMenuList.map((nav, index) => (
-          <Tooltip title={nav.title} placement="right" key={index}>
+          <Tooltip title={t(nav.title)} placement="right" key={index}>
             <StyledListItemButton
               disableRipple
               onClick={handleActiveMainMenu(nav)}

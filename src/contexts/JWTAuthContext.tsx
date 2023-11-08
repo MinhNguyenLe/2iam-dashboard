@@ -193,6 +193,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   });
 
   useEffect(() => {
+    console.log("URL ???", process.env.REACT_APP_API_URL);
     fetch(() =>
       axios.get(`${process.env.REACT_APP_API_URL}/iam`, {
         withCredentials: true,

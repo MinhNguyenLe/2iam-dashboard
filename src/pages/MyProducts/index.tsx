@@ -5,9 +5,16 @@ import SearchInput from "components/SearchInput";
 import TemplateItem from "components/Template/Item";
 import useLoading from "hooks/useLoading";
 import useTitle from "hooks/useTitle";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useTranslation } from "react-i18next";
 import axios from "utils/axios";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Link } from "react-router-dom";
 
 const StyledFlexBox = styled(FlexBox)(({ theme }) => ({
   justifyContent: "space-between",
@@ -25,7 +32,9 @@ const StyledFlexBox = styled(FlexBox)(({ theme }) => ({
 }));
 
 const MyProducts: FC = () => {
-  useTitle("My products");
+  const { t } = useTranslation();
+
+  useTitle("CHOOSE_THE_TEMPLATE_YOU_WANT");
 
   const { isLoading, fetch, data } = useLoading({
     onError: (err) => {
@@ -45,6 +54,17 @@ const MyProducts: FC = () => {
     );
   }, []);
 
+  const [open, setOpen] = useState(false);
+  const [targetTemplate, setTargetTemplate] = useState("");
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   if (isLoading) {
     return <LoadingScreen />;
   }
@@ -52,18 +72,60 @@ const MyProducts: FC = () => {
   return (
     <Box pt={2} pb={4}>
       <StyledFlexBox>
-        <SearchInput placeholder="Search user..." />
-        <Button variant="contained">Add New User</Button>
+        <SearchInput placeholder={t("FIND_TEMPLATE_YOU_WANT")} />
       </StyledFlexBox>
 
       <Grid container spacing={3}>
         {data?.templates?.map((template: any, index: number) => (
           <Grid item md={4} sm={6} xs={12} key={index}>
-            <TemplateItem template={template} />
+            <TemplateItem
+              template={template}
+              handleOpen={() => {
+                setTargetTemplate(template._id);
+                handleClickOpen();
+              }}
+            />
           </Grid>
         ))}
       </Grid>
       <PdfToJsonConverter />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title" style={{ fontSize: "16px" }}>
+          {t("YOU_HAVE_2_WAYS_TO_FILL_INFORMATION_INTO_YOUR_TEMPLATE")}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ color: "#414141" }}>
+            {t("ONE_YOU_CAN_UPLOAD_YOUR_RESUME_OR_CV")}
+          </DialogContentText>
+          <DialogContentText style={{ color: "#414141" }}>
+            {t("TWO_YOU_CAN_FILL_MANUALLY")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+            autoFocus
+          >
+            {t("CHOOSE_FILE")}
+          </Button>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            <Link to={`/resume-builder/${targetTemplate}`}>
+              {t("FILL_MANUALLY")}
+            </Link>
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };
@@ -94,7 +156,8 @@ const PdfToJsonConverter = () => {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: 16 }}>
+      <p>Testing: Convert pdf into Raw string</p>
       <input type="file" accept=".pdf" onChange={handleFileChange} />
       {isLoading ? "Loading ..." : <pre>{data?.data?.text}</pre>}
     </div>

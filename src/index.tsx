@@ -10,6 +10,8 @@ import "simplebar/dist/simplebar.min.css";
 import App from "./App";
 import "./__fakeApi__";
 
+import './i18n'
+
 ReactDOM.render(
   <StrictMode>
     <AuthProvider>

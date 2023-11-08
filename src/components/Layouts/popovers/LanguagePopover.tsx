@@ -1,24 +1,8 @@
 import { Box, IconButton, MenuItem, Popover, styled } from "@mui/material";
 import { H6 } from "components/Typography";
 import { FC, useRef, useState } from "react";
-
-// dummy language options
-const languageOptions: {
-  [key: string]: { icon: string; label: string };
-} = {
-  en: {
-    icon: "/static/flags/usa.png",
-    label: "English",
-  },
-  es: {
-    icon: "/static/flags/spain.png",
-    label: "Spanish",
-  },
-  //   hi: {
-  //     icon: '/static/flags/in.png',
-  //     label: 'Hindi',
-  //   },
-};
+import useLanguage from "../../../i18n";
+import { useTranslation } from "react-i18next";
 
 // custom styled components
 const IconWrapper = styled(Box)(() => ({
@@ -38,17 +22,35 @@ const ItemWrapper = styled(Box)(() => ({
 }));
 
 const LanguagePopover: FC = () => {
+  const {t} = useTranslation();
+
+  const languageOptions: {
+    [key: string]: { icon: any; label: string };
+  } = {
+    en: {
+      icon: "/static/flags/uk.png",
+      label: t("ENGLISH"),
+    },
+    vi: {
+      icon: "/static/flags/vn.png",
+      label: t("VIETNAMESE"),
+    },
+  };
+
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+
+  const { language, changeLanguage } = useLanguage();
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleChangeLanguage = (language: string) => {
+    changeLanguage(language);
     setOpen(false);
   };
 
-  const selectedLanguage = languageOptions["en"];
+  const selectedLanguage = languageOptions[language];
 
   return (
     <>

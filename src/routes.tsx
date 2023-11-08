@@ -14,6 +14,7 @@ const Loadable = (Component: LazyExoticComponent<FC>) => (props: any) =>
   );
 
 const MyProducts = Loadable(lazy(() => import("./pages/MyProducts")));
+const MyTemplates = Loadable(lazy(() => import("./pages/MyTemplates")));
 
 // authentication pages
 const Login = Loadable(lazy(() => import("./pages/authentication/Login")));
@@ -47,7 +48,7 @@ const Error = Loadable(lazy(() => import("./pages/404")));
 
 export const routesResume = [
   {
-    path: "/resume-builder",
+    path: "/resume-builder/:id",
     element: (
       <AuthGuard>
         <Resume />
@@ -96,6 +97,10 @@ const routes = [
       {
         path: "",
         element: <MyProducts />,
+      },
+      {
+        path: "list-templates",
+        element: <MyTemplates />,
       },
       {
         path: "create-template/:id",

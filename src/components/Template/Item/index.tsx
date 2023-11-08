@@ -1,9 +1,9 @@
 import { Box, Card, Divider, Grid, Button, styled } from "@mui/material";
-import { H3, H4, Small } from "components/Typography";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 const ImageWrapper = styled(Box)(({ theme }) => ({
-  height: 100,
+  height: 400,
   position: "relative",
   "&::before": {
     content: '""',
@@ -12,54 +12,28 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
     left: 0,
     top: 0,
     position: "absolute",
-    opacity: 0.6,
-    backgroundColor: theme.palette.primary[100],
   },
 }));
 
 interface TemplateItemProps {
   template: any;
+  handleOpen: any;
 }
 
-const TemplateItem = ({ template }: TemplateItemProps) => {
+const TemplateItem = ({ template, handleOpen }: TemplateItemProps) => {
+  const { t } = useTranslation();
+
   return (
     <Card>
       <ImageWrapper>
         <img
-          src="/static/cover/cover-1.png"
+          src="/static/cover/baker.png"
           width="100%"
           height="100%"
           alt={template.name}
         />
       </ImageWrapper>
-
-      <Box
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-          marginTop: 3,
-        }}
-      >
-        <H4>{template.name}</H4>
-        <Grid marginTop={0.1} container spacing={3}>
-          <Grid item xs={4} textAlign="center">
-            <H3>user</H3>
-            <Small color="text.disabled">345234</Small>
-          </Grid>
-          <Grid item xs={4} textAlign="center">
-            <H3>user</H3>
-            <Small color="text.disabled">123124</Small>
-          </Grid>
-          <Grid item xs={4} textAlign="center">
-            <H3>user</H3>
-            <Small color="text.disabled">11122</Small>
-          </Grid>
-        </Grid>
-      </Box>
-
-      <Divider sx={{ my: 2 }} />
-
+      <Divider sx={{ mb: 2 }} />
       <Grid
         container
         alignItems="center"
@@ -74,7 +48,7 @@ const TemplateItem = ({ template }: TemplateItemProps) => {
             variant="outlined"
             style={{ padding: "4px 10px", borderRadius: "24px" }}
           >
-            <Link to={template?.demo}>View demo</Link>
+            <Link to={template?.demo}>{t("VIEW_DEMO")}</Link>
           </Button>
         </Grid>
         <Grid item textAlign="center">
@@ -83,10 +57,11 @@ const TemplateItem = ({ template }: TemplateItemProps) => {
             size="small"
             variant="contained"
             style={{ padding: "4px 10px", borderRadius: "24px" }}
+            onClick={handleOpen}
           >
-            <Link to={`/dashboard/create-template/${template.name}`}>
-              Start (FREE)
-            </Link>
+            {/* <Link to={`/dashboard/create-template/${template.name}`}> */}
+              {t("CHOOSE")}
+            {/* </Link> */}
           </Button>
         </Grid>
       </Grid>

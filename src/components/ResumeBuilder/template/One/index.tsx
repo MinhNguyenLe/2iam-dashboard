@@ -53,6 +53,11 @@ class Template extends React.Component<TProps> {
             stateName="contact.email"
             placeholder="sample@gmail.com"
           />
+           <Text
+            value={this.props.contact.email_service}
+            stateName="contact.email_service"
+            placeholder="myfreelancer@gmail.com"
+          />
           <Text
             value={this.props.contact.phone_number}
             stateName="contact.phone_number"

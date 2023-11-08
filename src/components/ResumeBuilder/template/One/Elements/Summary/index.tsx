@@ -28,11 +28,11 @@ function Summary({ data }: any) {
             data={item.lists}
             pathName={`summary.details.${index}.lists`}
             defaultNewValue={{ content: "" }}
-            renderItem={(item: any, index: number) => (
+            renderItem={(item: any, indexList: number) => (
               <Text
                 className={styles.textListsItem}
                 value={item.content}
-                stateName={`summary.details.${index}.lists.${index}.content`}
+                stateName={`summary.details.${index}.lists.${indexList}.content`}
                 placeholder="First year at GogoJungle"
               />
             )}

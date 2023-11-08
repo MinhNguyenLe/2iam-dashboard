@@ -30,6 +30,12 @@ export const updateUserData = (data) => {
     };
 };
 
+export const clearPersist = () => {
+    return {
+        type: actionTypes.CLEAR_PERSIST,
+    };
+};
+
 export const uploadImageAction = (image) => {
     return () =>
         new Promise((resolve, reject) => {
