@@ -43,12 +43,11 @@ const AddNewUser = Loadable(
 );
 const Resume = Loadable(lazy(() => import("./pages/Resume")));
 
-// error
 const Error = Loadable(lazy(() => import("./pages/404")));
 
 export const routesResume = [
   {
-    path: "/resume-builder/:id",
+    path: "resume-builder/:id",
     element: (
       <AuthGuard>
         <Resume />
@@ -56,7 +55,7 @@ export const routesResume = [
     ),
   },
 ];
-// routes
+
 const routes = [
   {
     path: "/",

@@ -33,7 +33,7 @@ const App: FC = () => {
     },
   };
 
-  if (window.location.pathname.replace("/", "") === "resume-builder") {
+  if (window.location.pathname.replace("/", "").split("/").includes("resume-builder")) {
     return (
       <>
         <Provider store={appStore}>

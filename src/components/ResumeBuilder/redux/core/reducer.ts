@@ -7,25 +7,31 @@ import { actionTypes } from "./actionTypes";
 
 const initialState = {
   iam: {
-    position: "",
-    full_name: "",
-    nickname: "",
+    position: "Senior Software Engineer",
+    full_name: "Nguyen Le Minh",
+    nickname: "MinhLee",
     image: "images/nobody.jpg",
   },
   contact: {
     object_title: "Contact",
-    email: "",
-    phone_number: "",
-    address: "",
-    email_service: "",
-    current_company: "",
-    website: "",
+    email: "minh.nguyenle1809@gmail.com",
+    phone_number: "0706667411",
+    address: "District 8 Ho Chi Minh city",
+    email_service: "minh.nguyenle1809@gmail.com",
+    current_company: "bTaskee",
+    website: "https://btaskee.com",
     social_media: [
       {
         id: "1",
-        name: "",
+        name: "Linkedin",
         icon: "",
-        link: "",
+        link: "https://www.linkedin.com/in/minhlee2k/",
+      },
+      {
+        id: "2",
+        name: "Github",
+        icon: "",
+        link: "https://github.com/MinhLeeBtaskee",
       },
     ],
   },
@@ -34,11 +40,15 @@ const initialState = {
     details: [
       {
         id: "1",
-        paragraph: "",
+        paragraph: "I have 5 years as Software Engineer",
         lists: [
           {
             id: "1",
-            content: "",
+            content: "3 years Frontend Engineer",
+          },
+          {
+            id: "2",
+            content: "2 years Fullstack Engineer",
           },
         ],
       },
@@ -46,22 +56,25 @@ const initialState = {
   },
   skills: {
     object_title: "Skills",
-    lists: [{ id: "1", name: "", score: "" }],
+    lists: [
+      { id: "1", name: "React", score: "Master" },
+      { id: "2", name: "Javascript/Typescript", score: "Master" },
+    ],
   },
   educations: {
     object_title: "Educations",
     lists: [
       {
         id: "1",
-        major: "",
-        score: "",
-        status: "",
-        learning_time: "",
+        major: "Software Engineer",
+        score: "---",
+        status: "Completed",
+        learning_time: "2018 - 2022",
         training_place: {
-          name: "",
-          link: "",
+          name: "University Of Information Technology (UIT)",
+          link: "https://www.uit.edu.vn/",
         },
-        details: [{ id: "1", paragraph: "" }],
+        details: [{ id: "1", paragraph: "I have 4 years as Project leader" }],
       },
     ],
   },
@@ -70,22 +83,22 @@ const initialState = {
     lists: [
       {
         id: "1",
-        position: "",
-        period: "",
+        position: "Software Engineer",
+        period: "Dec 2022 - Present",
         company: {
-          name: "",
-          address: "",
-          link: "",
+          name: "bTaskee",
+          address: "Ho Chi Minh",
+          link: "https://btaskee.com",
         },
-        skills: "",
+        skills: "Meteorjs, Mongo, Typescript",
         details: [
           {
             id: "1",
-            paragraph: "",
+            paragraph: "I have team leaders of Back office team",
             lists: [
               {
                 id: "1",
-                content: "",
+                content: "Create dashboard website to support operations",
               },
             ],
           },
